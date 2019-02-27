@@ -1,0 +1,108 @@
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\N}[1]{\mathcal{N}\left(#1\right)}
+\newcommand*{\T}{^{\mkern-1.5mu\mathsf{T}}}
+\newcommand{\ud}[1]{\underline{\smash{#1}}}
+
+\frame{\frametitle{Introduction}
+  % \includegraphics[width=\textwidth]{pages/cur_pT_yy}
+}
+
+\frame{\frametitle{Definition}
+  One of the most commonly seen defenitions of a GP is this:
+  \begin{tcolorbox}
+    A Gaussian process is a collection of random variables, any finite number
+    of which have a joint Gaussian distribution.
+  \end{tcolorbox}
+
+  \vspace{5mm}
+  I hate it, because it provides no intuition about the usefulness of the
+  mathematical object or the inference method that utilizes it.
+
+  \vspace{5mm}
+  We'll return to the definitions later.
+}
+
+\begin{frame} \frametitle{The Setup}
+  \begin{itemize}
+    \item Assume we made an observation of a vector
+      $\vec{d} = [y_1,y_2,\mathellipsis,y_n]$,\\
+      and that $\vec{d}$ is sampled from a multivariate Gaussian
+      distribution,\\i.e. $\vec{d}\sim\N{\vec{0},D}$.
+    \vspace{1mm}
+    \item Assuming non-zero mean is no more general, because the mean can be
+      absorbed into the defenition of $\vec{d}$.
+    \vspace{1mm}
+    \item If we arbitrarily split $\vec{d}$ into subvectors
+      $\vec{a}$ and $\vec{b}$, then we can write
+  \end{itemize}
+  \begin{equation}\label{eq:n1}
+    \begin{bmatrix} \vec{a} \\ \vec{b} \end{bmatrix} \sim
+      \N{\vec{0},\begin{bmatrix} A & C\T \\ C & B \end{bmatrix}}
+  \end{equation}
+  \begin{itemize}
+    \item The conditional probability of $\vec{b}$ given $\vec{a}$ is
+  \end{itemize}
+  \begin{equation}
+    \vec{b}|\vec{a} \sim \N{CA^{-1}\vec{a},\,B-CA^{-1}C\T}
+  \end{equation}
+  \vspace{-3mm}
+  \begin{itemize}
+    \item Proof: {\small\url{https://stats.stackexchange.com/q/30588/239215}}
+  \end{itemize}
+\end{frame}
+
+\begin{frame} \frametitle{Bayesian Inference}
+  \begin{itemize}
+    \item Recall the Bayes' theorem
+  \end{itemize}
+  \vspace{1mm}
+  \begin{equation}
+    \text{posterior} =
+    \frac{\text{likelihood}\times\text{prior}}{\text{marginal likelihood}},
+    \quad
+    p(\vec{b}|\vec{a}) = \frac{p(\vec{a}|\vec{b})}{p(\vec{a})}\,p(\vec{b}).
+  \end{equation}
+  \begin{itemize}
+    \item $p(\vec{b}) = \N{\vec{0},B}$ can be viewed as the \ud{prior},
+      and $p(\vec{b}|\vec{a}) = \N{CA^{-1}\vec{a},\,B-CA^{-1}C\T}$ as the
+      \ud{posterior}.
+    \vspace{1mm}
+    \item GP is defined by the distribution in Eq.~\ref{eq:n1}.
+    \vspace{1mm}
+    \item Obviously, we don't have to have observed the $\vec{b}$ part of the
+      vector to make this inference.
+    \vspace{1mm}
+    \item In GP regression, inference is made about unobserved function values.
+  \end{itemize}
+\end{frame}
+
+\begin{frame} \frametitle{GP Regression}
+\end{frame}
+
+\begin{frame} \frametitle{GP Regression}
+\end{frame}
+
+\begin{frame} \frametitle{GP Regression}
+\end{frame}
+
+\begin{frame} \frametitle{GP Regression}
+\end{frame}
+
+\begin{frame} \frametitle{GP Regression}
+\end{frame}
+
+\begin{frame} \frametitle{GP Regression}
+\end{frame}
+
+\begin{frame} \frametitle{GP Regression}
+\end{frame}
+
+\begin{frame} \frametitle{GP Regression}
+\end{frame}
+
+\begin{frame} \frametitle{GP Regression}
+\end{frame}
+
+\begin{frame} \frametitle{GP Regression}
+\end{frame}
+

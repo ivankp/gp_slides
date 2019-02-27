@@ -1,0 +1,132 @@
+\documentclass[hyperref={
+  colorlinks, linkcolor=, citecolor=, urlcolor=blue,
+  pdfpagelabels=false
+}]{beamer}
+% \usepackage[pscoord]{eso-pic}
+
+\usepackage{color}
+\definecolor{MSU}{HTML}{004F39}
+\newcommand{\red}[1]{\textcolor[HTML]{EE0000}{#1}}
+
+\usepackage[absolute,overlay]{textpos}
+\TPGrid{100}{100}
+
+\usepackage{tikz}
+\usetikzlibrary{calc,matrix,positioning}
+
+% \usepackage{forloop}
+% \usepackage{pdfpages}
+% \usepackage{pgf}
+% \usepackage{multirow}
+% \usepackage{colortbl}
+\usepackage{bm}
+\usepackage[most]{tcolorbox}
+% \usepackage{xspace}
+% \usepackage{bold-extra}
+
+% Fixes -------------------------------------------------------------
+\usepackage{silence}
+\WarningFilter{latexfont}{Font shape}
+
+\let\Tiny=\tiny
+
+% Slide styles ------------------------------------------------------
+\usefonttheme{professionalfonts}
+\setbeamersize{text margin left=15pt,text margin right=15pt}
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{section in toc}{%
+  {\usebeamercolor[fg]{structure}\inserttocsectionnumber.}~%
+  {\color{black}\inserttocsection}}
+\setbeamertemplate{footline}{%
+  \usebeamerfont{author in head/foot}%
+  \ifnum\value{framenumber}=0
+    \vspace{2mm}
+  \else
+    \textcolor[HTML]{404A40}{
+    \insertshortauthor[width={1.7cm},respectlinebreaks,center]%
+    \hspace*{-0.8mm},\ %
+    \usebeamerfont{date in head/foot}\insertdate}%
+    \hfill%
+    {\scriptsize \insertframenumber/\inserttotalframenumber}%
+    \hspace*{1mm}
+  \fi
+}
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+
+\setbeamercolor{structure}{fg=MSU}
+\setbeamerfont{title}{series=\bfseries,parent=structure,size=\huge}
+\setbeamerfont{subtitle}{parent=structure,size=\Large}
+\setbeamerfont{institute}{size=}
+\setbeamertemplate{itemize items}{$\bullet$}
+\setbeamertemplate{itemize subitem}{$\circ$}
+
+\tcbset{colback=gray!10!white,colframe=MSU,
+  highlight math style={enhanced,colframe=red,colback=red!10!white,boxsep=0pt}
+}
+
+\newcommand\PlaceText[4][]{%
+\begin{tikzpicture}[remember picture,overlay]
+\node[outer sep=0pt,inner sep=0pt,anchor=north west,#1]
+  at ([xshift=#2\paperwidth,yshift=-#3\paperheight]current page.north west)
+  {#4};
+\end{tikzpicture}%
+}
+
+\def\changemargin#1#2{\list{}{\rightmargin#2\leftmargin#1}\item[]}
+\let\endchangemargin=\endlist
+
+% -------------------------------------------------------------------
+
+\input{aliases.tex}
+
+% Title, Authors, Date **********************************************
+\title{Gaussian Processes Demystified}
+\subtitle{PGO}
+\author{Ivan Pogrebnyak}
+\institute{Michigan State University}
+\date{February 28, 2019}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+% Title slide -------------------------------------------------------
+\frame{
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north west] at (current page.north west){
+      \includegraphics[height=30pt]{logos/msu_helmet}
+      \hspace{6px}\raisebox{4pt}
+      {\includegraphics[height=20pt]{logos/msu_text}}
+    };
+    \node[anchor=north east] at (current page.north east){
+      \includegraphics[height=30pt]{logos/cern_logo}
+      \vspace{5px}
+      \includegraphics[height=30pt]{logos/ATLAS-Logo-Ref-RGB}
+    };
+  \end{tikzpicture}
+  \titlepage
+  \setcounter{framenumber}{0}
+}
+\setbeamertemplate{frametitle}{%
+  \bfseries\insertframetitle\par\vskip-7pt{\textcolor{black}{\hrulefill}}
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north east] at (0.6,0.93){
+      \includegraphics[height=18pt]{logos/msu_helmet}
+      % \vspace{2px}
+      % \includegraphics[height=18pt]{logos/cern_logo}
+      % \vspace{2px}
+      % \includegraphics[height=18pt]{logos/ATLAS-Logo-Square-Blue-RGB}
+    };
+  \end{tikzpicture}
+}
+
+% *******************************************************************
+\input{slides.tex}
+
+% \newcounter{finalframe}
+% \setcounter{finalframe}{\value{framenumber}}
+%
+% \input{backup.tex}
+%
+% \setcounter{framenumber}{\value{finalframe}}
+
+\end{document}

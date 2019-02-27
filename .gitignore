@@ -1,0 +1,9 @@
+/*
+
+!.gitignore
+!*.tex
+!logos/
+!Makefile
+
+**.swp
+
