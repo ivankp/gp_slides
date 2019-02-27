@@ -204,15 +204,39 @@
 \begin{frame} \frametitle{GP Kernels}
 \end{frame}
 
+\begin{frame} \frametitle{Kernel parameter optimization}
+\end{frame}
+
 \begin{frame} \frametitle{GP for Classification}
 \end{frame}
 
-\begin{frame} \frametitle{}
+\begin{frame} \frametitle{- - -}
+\begin{itemize}
+  \item GP regression is not very good for extrapolation.
+  \item \red{connection to neural nets}
+\end{itemize}
 \end{frame}
 
-\begin{frame} \frametitle{}
-\end{frame}
+\newcommand{\R}[2]{\item #1 \\ {\scriptsize\url{#2}}}
+\newcommand{\arxiv}[1]{arXiv:\href{https://arxiv.org/abs/#1}{#1}}
 
-\begin{frame} \frametitle{}
+\begin{frame} \frametitle{References}
+\begin{itemize}
+  \R{Rasmussen \& Williams (the cannonical textbook)}
+    {http://www.gaussianprocess.org/gpml/chapters/}
+  \R{Mark Ebden {\small(simpler than R\&W)}}
+    {https://arxiv.org/abs/1505.02965}
+  \R{Katherine Bailey {\small(simple python\,\plus\,numpy code)}}
+    {http://katbailey.github.io/post/gaussian-processes-for-dummies/}
+  \R{CS229 Stanford Notes (Chuong Do)}
+    {http://cs229.stanford.edu/section/cs229-gaussian_processes.pdf}
+  \R{Rob Fletcher's slides (ATLAS internal)}
+    {https://indico.cern.ch/event/744257/contributions/3077617/attachments/1688169/2715519/GP_Fletcher.pdf}
+  \item Some interesting papers:
+  \begin{itemize}
+    \item \arxiv{1709.05681} (Modeling smooth backgrounds)
+    \item \arxiv{1302.4245} (Spectral mixture kernel)
+  \end{itemize}
+\end{itemize}
 \end{frame}
 
