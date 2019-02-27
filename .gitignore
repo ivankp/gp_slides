@@ -5,5 +5,7 @@
 !logos/
 !Makefile
 
+# !gp_slides.pdf
+
 **.swp
 

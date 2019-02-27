@@ -1,4 +1,4 @@
-PDF := pgo_gp.pdf
+PDF := gp_slides.pdf
 
 LATEX := pdflatex -interaction=batchmode -halt-on-error
 
