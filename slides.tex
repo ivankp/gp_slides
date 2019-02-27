@@ -4,105 +4,215 @@
 \newcommand{\ud}[1]{\underline{\smash{#1}}}
 
 \frame{\frametitle{Introduction}
-  % \includegraphics[width=\textwidth]{pages/cur_pT_yy}
+% \includegraphics[width=\textwidth]{pages/cur_pT_yy}
 }
 
 \frame{\frametitle{Definition}
-  One of the most commonly seen defenitions of a GP is this:
-  \begin{tcolorbox}
-    A Gaussian process is a collection of random variables, any finite number
-    of which have a joint Gaussian distribution.
-  \end{tcolorbox}
+\begin{itemize}
+  \item One of the most commonly seen defenitions of a GP is this:
+\end{itemize}
+\begin{tcolorbox}
+  A Gaussian process is a collection of random variables, any finite number
+  of which have a joint Gaussian distribution.
+\end{tcolorbox}
+\begin{itemize}
+  % I hate it, because it provides no intuition about the usefulness of the
+  % mathematical object or the inference method that utilizes it.
+  \item This is like saying that a fork is something that splits at one end. \\
+  An accurate, yet uninspiring statement.
 
   \vspace{5mm}
-  I hate it, because it provides no intuition about the usefulness of the
-  mathematical object or the inference method that utilizes it.
-
-  \vspace{5mm}
-  We'll return to the definitions later.
+  \item We'll return to the definition later.
+\end{itemize}
 }
 
 \begin{frame} \frametitle{The Setup}
-  \begin{itemize}
-    \item Assume we made an observation of a vector
-      $\vec{d} = [y_1,y_2,\mathellipsis,y_n]$,\\
-      and that $\vec{d}$ is sampled from a multivariate Gaussian
-      distribution,\\i.e. $\vec{d}\sim\N{\vec{0},D}$.
-    \vspace{1mm}
-    \item Assuming non-zero mean is no more general, because the mean can be
-      absorbed into the defenition of $\vec{d}$.
-    \vspace{1mm}
-    \item If we arbitrarily split $\vec{d}$ into subvectors
-      $\vec{a}$ and $\vec{b}$, then we can write
-  \end{itemize}
-  \begin{equation}\label{eq:n1}
-    \begin{bmatrix} \vec{a} \\ \vec{b} \end{bmatrix} \sim
-      \N{\vec{0},\begin{bmatrix} A & C\T \\ C & B \end{bmatrix}}
-  \end{equation}
-  \begin{itemize}
-    \item The conditional probability of $\vec{b}$ given $\vec{a}$ is
-  \end{itemize}
-  \begin{equation}
-    \vec{b}|\vec{a} \sim \N{CA^{-1}\vec{a},\,B-CA^{-1}C\T}
-  \end{equation}
-  \vspace{-3mm}
-  \begin{itemize}
-    \item Proof: {\small\url{https://stats.stackexchange.com/q/30588/239215}}
-  \end{itemize}
+\begin{itemize}
+  \item Assume we made an observation of a vector
+    $\vec{d} = [y_1,y_2,\mathellipsis,y_n]$,\\
+    and that $\vec{d}$ is sampled from a multivariate Gaussian
+    distribution,\\i.e. $\vec{d}\sim\N{\vec{0},D}$.
+  \vspace{1mm}
+  \item Assuming non-zero mean is no more general, because the mean can be
+    absorbed into the defenition of $\vec{d}$.
+  \vspace{1mm}
+  \item If we arbitrarily split $\vec{d}$ into subvectors
+    $\vec{a}$ and $\vec{b}$, then we can write
+\end{itemize}
+\begin{equation}\label{eq:n1}
+  \begin{bmatrix} \vec{a} \\ \vec{b} \end{bmatrix} \sim
+    \N{\vec{0},\begin{bmatrix} A & C \\ C\T\!\! & B \end{bmatrix}}
+\end{equation}
+\begin{itemize}
+  \item The conditional probability of $\vec{b}$ given $\vec{a}$ is
+\end{itemize}
+\vspace{1mm}
+\begin{equation}
+  p(\vec{b}|\vec{a})
+  = \frac{p(\vec{a}\cap\vec{b})}{p(\vec{a})}
+  = \frac{p(\vec{d})}{\int p(\vec{d})p(\vec{b}') d\vec{b}'}
+  = \boxed{ \N{C\T\!A^{-1}\vec{a},\,B-C\T\!A^{-1}C} }
+\end{equation}
+\vspace{-5mm}
+\begin{itemize}
+  \item Proof: {\small\url{https://stats.stackexchange.com/q/30588/239215}}
+\end{itemize}
 \end{frame}
 
 \begin{frame} \frametitle{Bayesian Inference}
+\vspace{-2mm}
+\begin{itemize}
+  \item Recall the Bayes' theorem
+\end{itemize}
+\vspace{1mm}
+\begin{equation}
+  \text{posterior} =
+  \frac{\text{likelihood}\times\text{prior}}{\text{marginal likelihood}},
+  \quad
+  p(\vec{b}|\vec{a}) = \frac{p(\vec{a}|\vec{b})}{p(\vec{a})}\,p(\vec{b}).
+\end{equation}
+\begin{itemize}
+  \item $p(\vec{b}) = \N{\vec{0},B}$ can be viewed as the \ud{prior},
+    and $p(\vec{b}|\vec{a}) = \N{C\T\!A^{-1}\vec{a},\,B-C\T\!A^{-1}C}$ as the
+    \ud{posterior}. \\
+    {\small\color{gray} * Conditioning}
+  \vspace{1mm}
+  \item GP is defined by the multivariate Gaussian distribution in
+    Eq.~\ref{eq:n1}.
+  \vspace{1mm}
+  \item Clearly, we didn't have to have observed the $\vec{b}$ part of the
+    vector to make this inference.
+  \vspace{1mm}
+  \item In GP regression, inference is made about unobserved function values.
   \begin{itemize}
-    \item Recall the Bayes' theorem
+    \item Think of a function as a (generally continuous infinite-dimensional)
+      vector, whose elements are labeled by the coordinates on the manifold
+      on which the function lives.
   \end{itemize}
   \vspace{1mm}
-  \begin{equation}
-    \text{posterior} =
-    \frac{\text{likelihood}\times\text{prior}}{\text{marginal likelihood}},
-    \quad
-    p(\vec{b}|\vec{a}) = \frac{p(\vec{a}|\vec{b})}{p(\vec{a})}\,p(\vec{b}).
-  \end{equation}
+  \item Non-zero convariance, $C$, contains the additional information. \\
+    Otherwise, $p(\vec{b}) = p(\vec{b}|\vec{a})$.
+\end{itemize}
+\end{frame}
+
+\begin{frame} \frametitle{GP Regression}
+\begin{itemize}
+  \item Given: observed function values, $y_i$, at points $x_i$.
+  \item Model: prior distribution of the function values,
+    given my the mean $m$ and covariance matrix $K$.
+    This is the GP.
+\end{itemize}
+\begin{equation}
+  f(x) \sim \N{m(x),K(x,x')}
+\end{equation}
+  \vspace{-7mm}
+\begin{itemize}
+  \item Take $m = 0$ for brevity
+  \item For observed values $y$, and unobserved values $y_*$, we can
+    write
+\end{itemize}
+\begin{equation}
+  \begin{bmatrix} y \\ y_* \end{bmatrix} \sim
+  \N{0,\,\begin{bmatrix} K(x,x) & K(x,x_*) \\ K(x_*,x) & K(x_*,x_*) \end{bmatrix}},
+  \ \text{or}
+\end{equation}
+\begin{equation}
+  \begin{bmatrix} y \\ y_* \end{bmatrix} \sim
+    \N{0,\,\begin{bmatrix} K & K_* \\ K_*\T\!\! & K_{**} \end{bmatrix}}.
+\end{equation}
+  \vspace{-4mm}
+\begin{itemize}
+  \item Then,
+\end{itemize}
+\begin{equation}
+  \boxed{ y_*|y \sim \N{K_*\T K^{-1}y,\,K_{**}-K_*\T K^{-1}K_*} }
+\end{equation}
+\end{frame}
+
+\begin{frame} \frametitle{GP Regression}
+\begin{equation}
+  \boxed{ y_*|y \sim \N{K_*\T K^{-1}y,\,K_{**}-K_*\T K^{-1}K_*} }
+\end{equation}
+\begin{itemize}
+  \item Gives the best linear unbiased prediction.
+  \item Direct measure of uncertainty at each point of the function.
+  \item Function value predictions are independent.
   \begin{itemize}
-    \item $p(\vec{b}) = \N{\vec{0},B}$ can be viewed as the \ud{prior},
-      and $p(\vec{b}|\vec{a}) = \N{CA^{-1}\vec{a},\,B-CA^{-1}C\T}$ as the
-      \ud{posterior}.
-    \vspace{1mm}
-    \item GP is defined by the distribution in Eq.~\ref{eq:n1}.
-    \vspace{1mm}
-    \item Obviously, we don't have to have observed the $\vec{b}$ part of the
-      vector to make this inference.
-    \vspace{1mm}
-    \item In GP regression, inference is made about unobserved function values.
+    \item Can compute point-by-point. \hspace{5mm}
+    {\small\color{gray} * Lazy learning}
   \end{itemize}
+  \item Also called Kriging.
+  \begin{itemize}
+    \item The theoretical basis for the method was developed by the French
+      mathematician Georges Matheron in 1960, based on the Master's thesis of
+      Danie G. Krige, the pioneering plotter of distance-weighted average gold
+      grades at the Witwatersrand reef complex in South Africa.
+      [\href{https://en.wikipedia.org/wiki/Kriging}{Wikipedia}]
+  \end{itemize}
+\end{itemize}
 \end{frame}
 
-\begin{frame} \frametitle{GP Regression}
+\begin{frame} \frametitle{GP Regression Algorithm}
+\begin{equation}
+  \boxed{ y_*|y \sim \N{K_*\T K^{-1}y,\,K_{**}-K_*\T K^{-1}K_*} }
+\end{equation}
+\begin{equation}
+  \bar{y}_* = \vec{k}_*\T K^{-1} \vec{y}, \quad
+  \mathrm{var}(y_*) = k_{**} - \vec{k}_*\T K^{-1} \vec{k}_*
+\end{equation}
+\vspace{-3mm}
+\begin{itemize}
+  \item In practice, instead of inverting the $K$ matrix, \\
+    Cholesky decomposition is used: $K = LL\T$.
+  \begin{itemize}
+    \item $K$ is symmetric.
+    \item $L$ is triangular.
+  \end{itemize}
+  \vspace{1mm}
+  \item Then $K^{-1} = (L^{-1})\T L^{-1}$, so
+\end{itemize}
+\begin{equation}
+  \bar{y}_* = \left(L^{-1}\vec{k}_*\right)\T \left(L^{-1} \vec{y}\right),
+  \quad
+  \mathrm{var}(y_*) = k_{**} -
+    \left(L^{-1}\vec{k}_*\right)\T
+    \left(L^{-1}\vec{k}_*\right)
+\end{equation}
+\vspace{-5mm}
+\begin{itemize}
+  \item Cholesky decomposition \plus\ back substitution generally has better
+    numerical stability than matrix inversion \plus\ multiplication.
+  \vspace{1mm}
+  \item My \cpp\ implementation:
+    % {\small\url{https://github.com/ivankp/GP/blob/master/include/gp.hh}}
+    {\small\url{https://git.io/fhN1j}}
+\end{itemize}
 \end{frame}
 
-\begin{frame} \frametitle{GP Regression}
+\begin{frame} \frametitle{What is a process?}
 \end{frame}
 
-\begin{frame} \frametitle{GP Regression}
+\begin{frame} \frametitle{GP: Function space view}
 \end{frame}
 
-\begin{frame} \frametitle{GP Regression}
+\begin{frame} \frametitle{GP: Weight space view}
+\begin{itemize}
+  \item \red{kernel trick}
+\end{itemize}
 \end{frame}
 
-\begin{frame} \frametitle{GP Regression}
+\begin{frame} \frametitle{GP Kernels}
 \end{frame}
 
-\begin{frame} \frametitle{GP Regression}
+\begin{frame} \frametitle{GP for Classification}
 \end{frame}
 
-\begin{frame} \frametitle{GP Regression}
+\begin{frame} \frametitle{}
 \end{frame}
 
-\begin{frame} \frametitle{GP Regression}
+\begin{frame} \frametitle{}
 \end{frame}
 
-\begin{frame} \frametitle{GP Regression}
-\end{frame}
-
-\begin{frame} \frametitle{GP Regression}
+\begin{frame} \frametitle{}
 \end{frame}
 
