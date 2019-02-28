@@ -12,7 +12,7 @@
   \begin{itemize}
     \item Or just that they depend on hyperparameters.
   \end{itemize}
-  \item Or that they can fit an arbitrery function.
+  \item Or that they can fit an arbitrary function.
   \item Or seen figures like these:
 \end{itemize}
 }
@@ -27,7 +27,7 @@
 
 \frame{\frametitle{Definition}
 \begin{itemize}
-  \item One of the most commonly seen defenitions of a GP is this:
+  \item One of the most commonly seen definitions of a GP is this:
 \end{itemize}
 \begin{tcolorbox}
   A Gaussian process is a collection of random variables, any finite number
@@ -44,7 +44,7 @@
 \end{itemize}
 }
 
-\begin{frame} \frametitle{The first step}
+\begin{frame} \frametitle{The Main Idea}
 \begin{itemize}
   \item Assume we made an observation of a vector
     $\vec{d} = [y_1,y_2,\mathellipsis,y_n]$,\\
@@ -52,7 +52,7 @@
     distribution,\\i.e. $\vec{d}\sim\N{\vec{0},D}$.
   \vspace{1mm}
   \item Assuming non-zero mean is no more general, because the mean can be
-    absorbed into the defenition of $\vec{d}$.
+    absorbed into the definition of $\vec{d}$.
   \vspace{1mm}
   \item If we arbitrarily split $\vec{d}$ into subvectors
     $\vec{a}$ and $\vec{b}$, then we can write
@@ -98,7 +98,7 @@
   \item GP is defined by the multivariate Gaussian distribution in
     Eq.~\ref{eq:n1}.
   \vspace{1mm}
-  \item Clearly, we didn't have to have observed the $\vec{b}$ part of the
+  \item Clearly, we didn't have to observe the $\vec{b}$ part of the
     vector to make this inference.
   \vspace{1mm}
   \item In GP regression, inference is made about unobserved function values.
@@ -116,8 +116,8 @@
 \begin{frame} \frametitle{GP Regression}
 \begin{itemize}
   \item Given: observed function values, $y_i$, at points $x_i$.
-  \item Model: prior distribution of the function values,
-    given my the mean $m$ and covariance matrix $K$.
+  \item Model: prior on the distribution of the function values,
+    given by the mean $m$ and covariance matrix $K$.
     This is the GP.
 \end{itemize}
 \begin{equation}
@@ -223,15 +223,15 @@
   \end{itemize}
   \item At every point on a manifold there is a distribution.
   \item Interesting properties arise from the properties of a particular field,
-    relating distributions at different points.
+    which relate distributions at different points.
   \vspace{4mm}
   \item These things are historically called processes, because early
     applications dealt with random variables labelled by points in time,
     giving the interpretation of a stochastic process representing
-    some system randomly changing over time. Examples include
+    some system randomly changing over time. Examples include:
   \begin{itemize}
-    \item growth of a bacterial population,
-    \item electrical current fluctuating due to thermal noise,
+    \item growth of bacterial populations,
+    \item electrical currents fluctuating due to thermal noise,
     \item movement of gas molecules.
   \end{itemize}
 \end{itemize}
@@ -318,7 +318,7 @@ Example from Rasmussen \& Williams \\
 \begin{itemize}
   \item The de-facto default kernel.
   \item Produces infinitely differentiable functions.
-  \item $\ell$ - lengthscale. Determines the scale of function's features.
+  \item $\ell$ - length scale. Determines the scale of function's features.
     Generally, cannot extrapolate farther than distance $\ell$ from the data.
   \item Stationary: depends only on $x-x'$.
   \item Isotropic: depends only on $|x-x'|$.
