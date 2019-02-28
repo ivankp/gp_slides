@@ -12,7 +12,7 @@ gp/*.pdf
 !google.png
 !samples.pdf
 
-# !gp_slides.pdf
+!gp_slides.pdf
 
 **.swp
 
