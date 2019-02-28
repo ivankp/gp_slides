@@ -190,6 +190,33 @@
 \end{frame}
 
 \begin{frame} \frametitle{What is a process?}
+\begin{itemize}
+  \item A stochastic process is a collection of labelled random variables.
+  \begin{itemize}
+    \item Implies a certain relationship between the random variables.
+    \item E.g. given by mean and covariance for a GP.
+  \end{itemize}
+  \item Other examples: Poisson, Markov, Wiener (Brownian motion).
+  \vspace{4mm}
+  \item Although this is strictly a subset,
+    I like to imagine a \textbf{random field}.
+  \begin{itemize}
+    \item That's the subset useful for GP regression anyway.
+  \end{itemize}
+  \item At every point on a manifold there is a distribution.
+  \item Interesting properties arise from the properties of a particular field,
+    relating distributions at different points.
+  \vspace{4mm}
+  \item These things are historically called processes, because early
+    applications dealt with random variables labelled by points in time,
+    giving the interpretation of a stochastic process representing
+    some system randomly changing over time. Examples include
+  \begin{itemize}
+    \item growth of a bacterial population,
+    \item electrical current fluctuating due to thermal noise,
+    \item movement of gas molecules.
+  \end{itemize}
+\end{itemize}
 \end{frame}
 
 \begin{frame} \frametitle{GP: Function space view}
@@ -206,16 +233,21 @@
 }
 
 \begin{frame} \frametitle{Squared Exponential Kernel}
+% \vspace{-1mm}
 \textbf{Synonims}: Radial Basis Function, Gaussian, Exponentiated Quadratic
 \begin{equation}
   k(x,x') = \exp\left(-\frac{\left|x-x'\right|^2}{2\ell^2}\right)
 \end{equation}
+  \vspace{-3mm}
 \begin{itemize}
   \item The de-facto default kernel.
   \item Produces infinitely differentiable functions.
   \item $\ell$ - lengthscale. Determines the scale of function's features.
     Generally, cannot extrapolate farther than distance $\ell$ from the data.
+  \item Stationary: depends only on $x-x'$.
+  \item Isotropic: depends only on $|x-x'|$.
 \end{itemize}
+\vspace{-2mm}
 \begin{center}
   \plot[0.5]{js_se_0_1_1.5}
 \end{center}
@@ -309,7 +341,7 @@
 \begin{itemize}
   \R{Rasmussen \& Williams (the cannonical textbook)}
     {http://www.gaussianprocess.org/gpml/chapters/}
-  \R{Mark Ebden {\small(simpler than R\&W)}}
+  \R{Mark Ebden {\small(simpler introduction than R\&W)}}
     {https://arxiv.org/abs/1505.02965}
   \R{Katherine Bailey {\small(simple python\,\plus\,numpy code)}}
     {http://katbailey.github.io/post/gaussian-processes-for-dummies/}

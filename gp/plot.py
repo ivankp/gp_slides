@@ -25,8 +25,8 @@ kernels = {
     'rq': kernel_rq
 }
 hnames = {
-    'se': [r'\sigma_n',r'\sigma_s',r'\ell'],
-    'rq': [r'\sigma_n',r'\sigma_s',r'\ell',r'\alpha']
+    'se': [r'\ell'],
+    'rq': [r'\ell',r'\alpha']
 }
 ker = sys.argv[2]
 gp = gaussian_process(xs,ys,us,ts,kernels[ker])
@@ -50,7 +50,7 @@ plt.plot(ts, [ m for m,u in gp ], 'k-', lw=2)
 # plt.axis([105,160,0,40])
 plt.margins(x=0)
 
-for i,x in enumerate(zip(hnames[ker],h)):
+for i,x in enumerate(zip([r'\sigma_n',r'\sigma_s']+hnames[ker],h)):
     plt.text(0.03,0.92-0.08*i,'${} = ${:g}'.format(*x),
              transform = ax.transAxes, fontsize=16)
 
