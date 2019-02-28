@@ -50,7 +50,7 @@
 \begin{equation}
   p(\vec{b}|\vec{a})
   = \frac{p(\vec{a}\cap\vec{b})}{p(\vec{a})}
-  = \frac{p(\vec{d})}{\int p(\vec{d})p(\vec{b}') d\vec{b}'}
+  = \frac{p(\vec{d})}{\int p(\vec{d})p(\vec{b}') \mathrm{d}\vec{b}'}
   = \boxed{ \N{C\T\!A^{-1}\vec{a},\,B-C\T\!A^{-1}C} }
 \end{equation}
 \vspace{-5mm}
@@ -251,7 +251,45 @@
 \end{changemargin}
 \end{frame}
 
-\begin{frame} \frametitle{Kernel parameter optimization}
+\begin{frame} \frametitle{Rational Quadratic Kernel}
+\begin{equation}
+  k(x,x') = \left( 1 + \frac{\left|x-x'\right|^2}{2\alpha\ell^2} \right)^{-\alpha}
+\end{equation}
+\begin{itemize}
+  \item Equivalent to a series of SE kernels with different length scales.
+  \item $\alpha$ - determines the relative weighting of large-scale and
+    small-scale variations.
+  \item RQ $\rightarrow$ SE as $\alpha\rightarrow\infty$.
+\end{itemize}
+\begin{center}
+  \plot[0.5]{js_rq_0_1_1.5_2}
+\end{center}
+\end{frame}
+
+\begin{frame} \frametitle{Periodic Kernel}
+\begin{equation}
+  k(x,x') = \exp\left(-\frac{2}{\ell^2}\sin^2\left[\frac{\pi|x - x'|}{\lambda}\right]\right)
+\end{equation}
+\begin{itemize}
+  \item Allows to model functions with exact periodicity.
+\end{itemize}
+\end{frame}
+
+\begin{frame} \frametitle{Kernel Composition}
+\begin{itemize}
+  \item Allows to better capture features on different scales
+  \item Multiplication: AND operation
+  \item Addition: OR operation
+  \item Example: Locally periodic kernel
+\end{itemize}
+\begin{equation}
+  k(x,x') =
+  \exp\left(-\frac{2}{\ell_1^2}\sin^2\left[\frac{\pi|x - x'|}{\lambda}\right]\right)
+  \exp\left(-\frac{\left|x-x'\right|^2}{2\ell_2^2}\right)
+\end{equation}
+\end{frame}
+
+\begin{frame} \frametitle{Optimization of Kernel Parameters}
 \end{frame}
 
 \begin{frame} \frametitle{GP for Classification}

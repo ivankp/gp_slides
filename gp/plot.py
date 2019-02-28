@@ -17,11 +17,16 @@ us = [ h[0]**2 for x in xs ]
 def kernel_se(a, b):
     return h[1]**2 * math.exp(-0.5*(((a-b)/h[2])**2))
 
+def kernel_rq(a, b):
+    return h[1]**2 * math.pow(1+(((a-b)/h[2])**2)/(2*h[3]), -h[3])
+
 kernels = {
-    'se': kernel_se
+    'se': kernel_se,
+    'rq': kernel_rq
 }
 hnames = {
-    'se': [r'\sigma_n',r'\sigma_s',r'\ell']
+    'se': [r'\sigma_n',r'\sigma_s',r'\ell'],
+    'rq': [r'\sigma_n',r'\sigma_s',r'\ell',r'\alpha']
 }
 ker = sys.argv[2]
 gp = gaussian_process(xs,ys,us,ts,kernels[ker])
