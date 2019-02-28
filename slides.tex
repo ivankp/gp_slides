@@ -238,6 +238,32 @@
 \end{frame}
 
 \begin{frame} \frametitle{GP: Function space view}
+\begin{itemize}
+  \item Gaussian process is a multidimensional Gaussian distribution with each
+    dimension corresponding a point on the domain manifold.
+  \item $\therefore$ GP is a distribution of these vectors
+  \item Each vector is a function on the manifold.
+  \item $\therefore$ GP is a distribution of functions.
+  \vspace{5mm}
+  \item These functions can be sampled.
+  \item For a univariate normal distribution:
+    $\N{\mu,\sigma^2} = \mu + \sigma\N{0,1}$
+  \item For a multivariate normal distribution:
+    $\N{\bm{\mu},\Sigma} = \bm{\mu} + B\N{\vec{0},I}$,
+    where $BB\T=\Sigma$.
+  \item To get a sample function:
+  \begin{enumerate}
+    \item Generate a vector $\vec{v}$ of $n$ standard normally distributed numbers;
+    \item Find Cholesky decomposition of an $n\times n$, $K_{**} = BB\T$ matrix;
+    \item The function values are $\vec{f} = \bm{\mu} + B\vec{v}$.
+  \end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame} \frametitle{Example of function sampling}
+Example from Rasmussen \& Williams \\
+{\color{white}\rule{2mm}{5mm}}
+\includegraphics[width=\textwidth]{samples.pdf}
 \end{frame}
 
 \begin{frame} \frametitle{GP: Weight space view}
