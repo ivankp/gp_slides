@@ -8,6 +8,8 @@
 !gp/
 gp/*.pdf
 
+!matern.pdf
+
 # !gp_slides.pdf
 
 **.swp

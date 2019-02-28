@@ -3,6 +3,7 @@
 import math, sys, json
 from gaussian_process import *
 import numpy as np
+from scipy import special
 
 # https://apps.automeris.io/wpd/
 with open('data.json') as f:
@@ -20,13 +21,21 @@ def kernel_se(a, b):
 def kernel_rq(a, b):
     return h[1]**2 * math.pow(1+(((a-b)/h[2])**2)/(2*h[3]), -h[3])
 
+def kernel_mat(a, b):
+    nu = h[3]
+    r = math.sqrt(2*nu) * abs(a-b) / h[2]
+    return h[1]**2 * ( math.pow(2,1-nu)/math.gamma(nu) ) \
+         * math.pow(r,nu) * special.kn(nu,r)
+
 kernels = {
     'se': kernel_se,
-    'rq': kernel_rq
+    'rq': kernel_rq,
+    'mat': kernel_mat
 }
 hnames = {
     'se': [r'\ell'],
-    'rq': [r'\ell',r'\alpha']
+    'rq': [r'\ell',r'\alpha'],
+    'mat': [r'\ell',r'\nu']
 }
 ker = sys.argv[2]
 gp = gaussian_process(xs,ys,us,ts,kernels[ker])

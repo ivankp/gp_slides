@@ -307,6 +307,30 @@
 \end{itemize}
 \end{frame}
 
+\begin{frame} \frametitle{Mat\'ern Kernel}
+\vspace{-3mm}
+\begin{equation}
+  k(d) = \frac{2^{1-\nu}}{\Gamma(\nu)}\Bigg(\sqrt{2\nu}\,\frac{r}{\rho}\Bigg)^\nu
+    K_\nu\Bigg(\sqrt{2\nu}\,\frac{r}{\rho}\Bigg)
+\end{equation}
+\vspace{-3mm}
+\begin{itemize}
+  \item $r = |x-x'|$
+  \item $\Gamma$ - gamma function
+  \item $K_\nu$ - modified Bessel function of the second kind
+  \item $\rho$ and $\nu$ are non-negative parameters.
+  \item Yields sample paths that are $\lceil\nu\rceil - 1$ times differentiable.
+\end{itemize}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{matern}
+\end{center}
+\PlaceText{0.24}{0.91}{{\small kernel functions}}
+\PlaceText{0.61}{0.91}{{\small sampled functions}}
+\PlaceText{0.88}{0.81}{{\color{gray}\scriptsize Figure from}}
+\PlaceText{0.88}{0.84}{{\color{gray}\scriptsize Rasmussen}}
+\PlaceText{0.88}{0.87}{{\color{gray}\scriptsize \& Williams}}
+\end{frame}
+
 \begin{frame} \frametitle{Kernel Composition}
 \begin{itemize}
   \item Allows to better capture features on different scales
