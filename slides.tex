@@ -268,8 +268,29 @@ Example from Rasmussen \& Williams \\
 
 \begin{frame} \frametitle{GP: Weight space view}
 \begin{itemize}
-  \item \red{kernel trick}
+  \item Model a linear function with some Gaussian noise:
+  \begin{equation}
+    f(\vec{x}) = \vec{x}\T\vec{w}, \quad
+    y = f(\vec{x}) + \epsilon, \quad
+    \epsilon \sim \N{0,\sigma_n^2}
+  \end{equation}
+  \item This implies the likelihood, the probability density of the
+    observations given the parameters:
+  \begin{equation}
+    p(\vec{y}|X,\vec{w}) = \N{X\T\vec{w},\,\sigma_n^2I}
+  \end{equation}
+  \item Putting a prior on $\vec{w}$ and using Bayes' theorem yields a
+    posterior distribution:
+  \begin{equation}
+    \vec{w} \sim \N{\vec{0},\Sigma_p}
+    \quad\Rightarrow\quad
+    p(\vec{w}|X,\vec{y}) = \N{\sigma_n^{-2}A^{-1}X\vec{y},\,A^{-1}},
+  \end{equation}
+    where $A = \sigma_n^{-2}XX\T + \Sigma_p^{-1}$.
+  \item This is like doing a linear fit using infinite-dimensional function
+    basis. Weight is synonymous to fit parameter in this language.
 \end{itemize}
+% Kernel trick would be mentioned here
 \end{frame}
 
 \begin{frame} \frametitle{Relation to Neural Networks}
