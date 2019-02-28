@@ -422,10 +422,34 @@ Example from Rasmussen \& Williams \\
 \end{frame}
 
 \begin{frame} \frametitle{Optimization of Kernel Parameters}
+\begin{itemize}
+  \item Need to maximize $p(\theta|x,y)$.
+  \item By the Bayes' theorem, this is the same as maximizing $p(y|x,\theta)$.
+  \item This is the prior.
+\end{itemize}
+\begin{equation}
+  \vec{y} \sim \N{\vec{0},K}
+\end{equation}
+\begin{itemize}
+  \item Therefore, optimal parameters are given my maximizing log prior
+    likelihood:
+\end{itemize}
+\begin{equation}
+  \log p(y) = - \tfrac{1}{2}\vec{y}\T K^{-1}\vec{y}
+              - \tfrac{1}{2}\log|K| - \tfrac{n}{2}\log 2\pi
+\end{equation}
+\begin{itemize}
+  \item Knowledge of the specific problem may dictate more appropriate kernel
+    parameters.
+  \begin{itemize}
+    \item For example, noise variance may be known.
+    \item Length scale may have a physical meaning.
+  \end{itemize}
+\end{itemize}
 \end{frame}
 
-\begin{frame} \frametitle{GP for Classification}
-\end{frame}
+% \begin{frame} \frametitle{GP for Classification}
+% \end{frame}
 
 \newcommand{\R}[2]{\item #1 \\ {\scriptsize\url{#2}}}
 \newcommand{\arxiv}[1]{arXiv:\href{https://arxiv.org/abs/#1}{#1}}
