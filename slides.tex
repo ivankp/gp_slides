@@ -201,7 +201,54 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame} \frametitle{GP Kernels}
+\newcommand{\plot}[2][0.36]{%
+  \includegraphics[width=#1\textwidth]{gp/{#2}.pdf}
+}
+
+\begin{frame} \frametitle{Squared Exponential Kernel}
+\textbf{Synonims}: Radial Basis Function, Gaussian, Exponentiated Quadratic
+\begin{equation}
+  k(x,x') = \exp\left(-\frac{\left|x-x'\right|^2}{2\ell^2}\right)
+\end{equation}
+\begin{itemize}
+  \item The de-facto default kernel.
+  \item Produces infinitely differentiable functions.
+  \item $\ell$ - lengthscale. Determines the scale of function's features.
+    Generally, cannot extrapolate farther than distance $\ell$ from the data.
+\end{itemize}
+\begin{center}
+  \plot[0.5]{js_se_0_1_1.5}
+\end{center}
+\end{frame}
+
+\begin{frame} \frametitle{Noise and signal variances}
+\vspace{-2mm}
+\begin{itemize}
+  \item Typically, two extra parameters are added to the kernel model.
+  \item $\sigma_s^2$ - signal variance.
+    This is a multiplicative factor attached to every additive term in a
+    kernel.
+    Determines the average distance of the function away from the mean.
+  \item $\sigma_n^2$ - noise variance.
+    This is added to the diagonal elements of the kernel, and provides a
+    measure of the observation's uncertainty.
+  \item With both terms introduced, the SE kernel looks like this
+\end{itemize}
+\begin{equation}
+  k(x,x') = \sigma_s^2 \exp\left(-\frac{\left|x-x'\right|^2}{2\ell^2}\right)
+          + \sigma_n^2 \delta_{xx'}
+\end{equation}
+\vspace{-2.5mm}
+\begin{itemize}
+  \item $\sigma_n^2$ can be different for every point, e.g. Poisson
+    uncertainties for a histogram.
+\end{itemize}
+\vspace{-4mm}
+\begin{changemargin}{-4.3mm}{0mm}
+\plot{rw_se_0.1_1_1}
+\plot{rw_se_5e-05_1.08_0.3}
+\plot{rw_se_0.89_1.16_3}
+\end{changemargin}
 \end{frame}
 
 \begin{frame} \frametitle{Kernel parameter optimization}
@@ -230,6 +277,8 @@
     {http://katbailey.github.io/post/gaussian-processes-for-dummies/}
   \R{CS229 Stanford Notes (Chuong Do)}
     {http://cs229.stanford.edu/section/cs229-gaussian_processes.pdf}
+  \R{Kernel Cookbook (David Duvenaud)}
+    {https://www.cs.toronto.edu/~duvenaud/cookbook/}
   \R{Rob Fletcher's slides (ATLAS internal)}
     {https://indico.cern.ch/event/744257/contributions/3077617/attachments/1688169/2715519/GP_Fletcher.pdf}
   \item Some interesting papers:
