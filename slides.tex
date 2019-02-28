@@ -4,8 +4,26 @@
 \newcommand{\ud}[1]{\underline{\smash{#1}}}
 
 \frame{\frametitle{Introduction}
-% \includegraphics[width=\textwidth]{pages/cur_pT_yy}
+\begin{itemize}
+  \item You've all probably heard of them.
+  \item It's a hot topic in data science, along with neural nets and machine
+    learning.
+  \item You might have heard that they provide a non-parametric function model.
+  \begin{itemize}
+    \item Or just that they depend on hyperparameters.
+  \end{itemize}
+  \item Or that they can fit an arbitrery function.
+  \item Or seen figures like these:
+\end{itemize}
 }
+
+\begin{frame}[plain]
+  \vspace{-5mm}
+  Google image search for ``Gaussian process" \\
+  {\color{white}\rule{2mm}{5mm}}
+  \hspace*{-6.3mm}
+  \includegraphics[width=\paperwidth]{google}
+\end{frame}
 
 \frame{\frametitle{Definition}
 \begin{itemize}
@@ -26,7 +44,7 @@
 \end{itemize}
 }
 
-\begin{frame} \frametitle{The Setup}
+\begin{frame} \frametitle{The first step}
 \begin{itemize}
   \item Assume we made an observation of a vector
     $\vec{d} = [y_1,y_2,\mathellipsis,y_n]$,\\
@@ -228,6 +246,17 @@
 \end{itemize}
 \end{frame}
 
+\begin{frame} \frametitle{Relation to Neural Networks}
+\begin{itemize}
+  \item Bayesian neural networks because Gaussian processes in the limit of the
+    number of hidden nodes approaching infinity.
+  \begin{itemize}
+    \item Neal, R.M. Bayesian Learning for Neural Networks.\\
+      Springer Verlag, 1996. ISBN 0387947248.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
 \newcommand{\plot}[2][0.36]{%
   \includegraphics[width=#1\textwidth]{gp/{#2}.pdf}
 }
@@ -349,13 +378,6 @@
 \end{frame}
 
 \begin{frame} \frametitle{GP for Classification}
-\end{frame}
-
-\begin{frame} \frametitle{- - -}
-\begin{itemize}
-  \item GP regression is not very good for extrapolation.
-  \item \red{connection to neural nets}
-\end{itemize}
 \end{frame}
 
 \newcommand{\R}[2]{\item #1 \\ {\scriptsize\url{#2}}}

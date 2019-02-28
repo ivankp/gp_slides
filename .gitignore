@@ -9,6 +9,7 @@
 gp/*.pdf
 
 !matern.pdf
+!google.png
 
 # !gp_slides.pdf
 
